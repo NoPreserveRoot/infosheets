@@ -1,6 +1,4 @@
-<div style="text-align: center">
-<h1>Rust</h1>
-</div>
+<h1 align="center">Rust</h1>
 
 # Variables
 In Rust, variables are defined using the `let` keyword.
