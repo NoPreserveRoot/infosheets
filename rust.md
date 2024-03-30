@@ -2,6 +2,32 @@
 <h1>Rust</h1>
 </div>
 
+# Variables
+In Rust, variables are defined using the `let` keyword.
+
+Variable definitions follow this format ([] denotes optional, <> denotes required):
+```rust
+let [mut] <name>[: type] = <value>;
+```
+`[: type]` is in brackets because a variable's type can be inferred from its value in many cases, in which case it is implicitly specified by the compiler. However, you can also explicitly specify a type using `: <type>`.
+Example:
+```rust
+let explicit: u32 = 3223463;
+```
+
+Rust variables are immutable by default, so you must define them as mutable if you ever want to change their value.
+
+Example:
+```rust
+// Define an immutable variable called "immutable" with a value of 9 and a type of i32
+let immutable = 9;
+
+// Define a mutable variable called "woah_mutable" with a value of 27 and a type of i32
+let mut woah_mutable = 27;
+```
+
+In the previous example
+
 # Primitives
 ### Integers
 Rust's standard library contains 8, 16, 32, 64, and 128-bit integers. All integers are either signed or unsigned. Signed integers can be negative, whereas unsigned integers can only be positive.
