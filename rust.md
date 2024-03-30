@@ -98,3 +98,39 @@ Example:
 ```rust
 let array: [char; 11] = ['h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd'];
 ```
+
+# Vectors
+Rust doesn't have an ArrayList type like in Java. Nor does it have a stack or queue. Instead, there's the (wonderful) vector, which is essentially those three things bundled into one absolute unit of a data type. Vectors are homogeneous, but they have a dynamic length and plenty of functions that make them great for a myriad of use cases.
+
+Example:
+```rust
+// Create a vector using Vec::new()
+let vec1: Vec<u8> = Vec::new();
+
+// Create a vector with values using the vec! macro
+let vec2: Vec<u8> = vec![0,1,2,3,4,5,6,7,8,9];
+
+// Add a new value onto the end of vec1
+vec1.push(27);
+
+// Remove the last value in the vec1
+let popped = vec1.pop();
+
+// Remove the fourth value in vec1 (remember, indices start at 0)
+let removed = vec1.remove(3);
+
+// Insert a new value as the second element in vec1
+vec1.insert(1, 28);
+
+// Get the length of vec1
+let length = vec1.len();
+
+// Check if vec1 is empty
+let empty = vec1.is_empty(); // false
+
+// Access first element in vec1
+let first_elem = vec1.first();
+
+// Access last element in vec1
+let last_elem = vec1.last();
+```
