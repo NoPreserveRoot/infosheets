@@ -166,3 +166,49 @@ let result = match x {
 };
 ```
 As shown above, `match` statements can be used to return a value *or* execute statements and functions. I chose to use `panic!()` here, which causes the program to terminate and print a stack trace, but you can using `match` statements to essentially avoid building a massive tree of `if else` statements.
+
+# Options
+One of Rust's biggest selling points is its memory safety. This means it *has* to avoid null pointers. But how?
+
+The main way this is accomplished is by using the `Option<T>` enum, where `T` is a type. An Option can either contain the `Some(T)` enum member or the `None` enum member. Calling the `.unwrap()` function on an Option will return the value `T` inside if it is `Some` or panic if it is `None`.
+
+Example:
+```rust
+let vector: Vec<u8> = vec![];
+let another: Vec<u8> = vec![1,5,1,2];
+
+let value = vector.pop(); // None
+let value2 = another.pop(); // Some(2)
+
+let unwrap = value2.unwrap(); // 2
+let uhoh = value.unwrap(); // panic
+```
+
+### `let match`
+There are a few better ways to handle `Options`. One of which is using pattern matching.
+
+Example:
+```rust
+let vector: Vec<u8> = vec![];
+let value = vector.pop(); // None
+
+let val: u8 = match value {
+    Some(x) => x,
+    None => 0
+};
+```
+
+### `if let`
+However, Rust has another way of handling Options that's just *beautiful* once you get the hang of it. This is the `if let` statement.
+
+Example:
+```rust
+let vector: Vec<u8> = vec![];
+let value = vector.pop(); // None
+
+if let Some(v) = value {
+    println!("{}", v);
+} else {
+    println!("v is None, that's problematic!");
+}
+```
