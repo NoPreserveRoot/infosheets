@@ -134,3 +134,35 @@ let first_elem = vec1.first();
 // Access last element in vec1
 let last_elem = vec1.last();
 ```
+
+# Flow control
+### `if` statements
+Unsurprisingly, Rust has `if` statements. Their syntax is fairly straightforward; extremely similar to that of Java, but without any annoying parentheses.
+
+Example:
+```rust
+let x = 5;
+if x > 20 {
+    println!("x is greater than 20");
+} else {
+    println!("x is less than or equal to 20");
+}
+```
+
+### `match` statements
+Rust also has `match` statements, which are similar to `switch` statements in other languages. Instead of having to write `case` for each case, you just need to specify the case and use the "right arrow" operator to define what should be done. You can also match multiple values using the `|` operator and a range of values using the `..` operator. The `_ =>` case is basically the same as the `default` case in some other languages, and it's required for all `match` statements since they must be exhaustive.
+
+Example:
+```rust
+let x = 5;
+let result = match x {
+    5 => "woohoo! x is 5!",
+    9 | 10 => "x is 9 or 10! multiple matches are cool!",
+    11..20 => "x is in the range of [11, 20]",
+    21.. => "x is greater than or equal to 20",
+    _ => {
+        panic!("That's really weird! This shouldn't happen! AhhhhhHHHH!!!!");
+    }
+};
+```
+As shown above, `match` statements can be used to return a value *or* execute statements and functions. I chose to use `panic!()` here, which causes the program to terminate and print a stack trace, but you can using `match` statements to essentially avoid building a massive tree of `if else` statements.
