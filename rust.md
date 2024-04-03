@@ -97,6 +97,24 @@ Example:
 let array: [char; 11] = ['h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd'];
 ```
 
+### Slice
+Slices allow you to reference a contiguous sequence of elements in a collect (array, vector, String, et cetera). Their size is not known at compile time, so it's possible for them to cause a panic when indexed out of bounds.
+
+Example:
+```rust
+let val = String::from("Rust is cool!");
+
+let slice = &val[0..4]; // let slice: &str = "Rust";
+```
+
+This also shows the "string slice" type, which is written as `&str`. This is also the implicit type of string literals
+
+Example:
+
+```rust
+let val = "Hello, world!"; // Type is &str
+```
+
 # Vectors
 Rust doesn't have an ArrayList type like in Java. Nor does it have a stack or queue. Instead, there's the (wonderful) vector, which is essentially those three things bundled into one absolute unit of a data type. Vectors are homogeneous, but they have a dynamic length and plenty of functions that make them great for a myriad of use cases.
 
