@@ -183,6 +183,63 @@ let result = match x {
 ```
 As shown above, `match` statements can be used to return a value *or* execute statements and functions. I chose to use `panic!()` here, which causes the program to terminate and print a stack trace, but you can using `match` statements to essentially avoid building a massive tree of `if else` statements.
 
+# Loops
+### `for` loops
+Rust has `for` loops like many other languages.
+
+Example of a "for each" loop:
+```rust
+let arr: [u8; 5] = [0, 1, 2, 3, 4];
+
+for i in arr {
+    println!("{}", i);
+}
+```
+
+Example of a "typical" for loop (ex. `for (int i = 0; i < 20; i++)` in Java):
+```rust
+for i in 0..20 {
+    println!("{}", i);
+}
+```
+
+### `while` loops
+`while` loops are pretty straightforward.
+
+Example:
+```rust
+let mut i: u8 = 20;
+while i > 0 {
+    println!("{}", i);
+    i -= 1;
+}
+```
+
+### `loop` loops
+A better way to write this might be "loop expression," but I think "loop loops" sounds way funnier. These are basically infinite loops. They run until broken.
+
+Example:
+
+```rust
+loop {
+    print!(":D "); // Print happy faces until interrupted
+}
+```
+
+### `while let` loops
+Runs until a tested pattern evaluates to false. These can be very useful when working with stacks, for example.
+
+Example:
+```rust
+let mut stack = vec![1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+while let Some(val) = stack.pop() {
+    println!("{}", val);
+}
+
+// stack is empty after the loop completes
+```
+
 # Options
 One of Rust's biggest selling points is its memory safety. This means it *has* to avoid null pointers. But how?
 
