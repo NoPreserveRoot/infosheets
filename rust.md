@@ -285,3 +285,17 @@ if let Some(v) = value {
     println!("v is None, that's problematic!");
 }
 ```
+
+# Results
+Results are similar to Options, but they can contain an "Ok" value or an "Err" value. These can be used for error handling without panicking. Results can also be used in `if let` statements.
+
+Example:
+
+```rust
+let result = fn_that_may_error();
+
+match result {
+    Ok(val) => println!("{}", val),
+    Err(err) => println!("{}", err.to_string());
+}
+```
