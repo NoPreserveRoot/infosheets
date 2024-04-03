@@ -115,6 +115,24 @@ Example:
 let val = "Hello, world!"; // Type is &str
 ```
 
+# Operators
+Rust has quite a few operators, but the ones you're most likely to need are:
+
+| Operator | Use |
+| -------- | --- |
+| !        | Bitwise or logical complement |
+| &        | Borrow or bitwise AND |
+| +        | Arithmetic addition   |
+| -        | Arithmetic subtraction or negation |
+| *        | Arithmetic multiplication |
+| /        | Arithmetic division       |
+| %        | Modulo |
+| ..       | Range |
+| &&       | Logical AND |
+| \|\|     | Logical OR |
+
+A complete list can be found [here](https://doc.rust-lang.org/book/appendix-02-operators.html).
+
 # Vectors
 Rust doesn't have an ArrayList type like in Java. Nor does it have a stack or queue. Instead, there's the (wonderful) vector, which is essentially those three things bundled into one absolute unit of a data type. Vectors are homogeneous, but they have a dynamic length and plenty of functions that make them great for a myriad of use cases.
 
@@ -298,4 +316,215 @@ match result {
     Ok(val) => println!("{}", val),
     Err(err) => println!("{}", err.to_string());
 }
+```
+# Functions
+Coming from a language like Java, C, or C++, declaring functions in Rust seems kinda funky. To create a function called `print_n_times`, we would write the following:
+```rust
+fn print_n_time(count: u32, val: String) {
+    for _ in 0..count {
+        println!("{val}");
+    }
+}
+```
+
+To create a function that accepts someone's name and returns a string that says "Hello, {your_name}":
+
+```rust
+fn hello_name(name: String) -> String {
+    format!("Hello, {}!", name)
+}
+```
+
+**Notice that I didn't write `return` in there.** The last expression in a function can be written without a semicolon to return its value. The `return` keyword, can be used to do an early return (ex. in an `if` statement) but it can also be used at the end of a function. Whether or not you use the `return` keyword at the end is essentially a stylistic choice.
+
+# Macros
+You may have noticed that certain functions end with `!`. This is because they aren't functions, they're macros. Macros are essentially "code that writes code for you." A few common macros that you'll likely need to use are:
+
+| Macro | Use |
+| ----- | --- |
+| println! | Print a line of text using a format and specified arguments |
+| print!   | The same thing as println! but without a newline |
+| vec!     | Create a vector from specified values |
+
+# Structs
+In Rust, a `struct` is used to hold data. They are fairly straightfoward and by themselves, contain no functionality. Without an implementation, a `struct` can instantiated by specifying concrete values for the `struct`'s fields.
+
+The concept of getters and setters is handled a bit differently in Rust than in languages like Java and C++. For more information, see [this explanation](https://web.archive.org/web/20240403022822/https://old.reddit.com/r/rust/comments/d7w6n7/is_it_idiomatic_to_write_setters_and_getters/f15ib88/).
+
+Example:
+
+```rust
+struct Dog {
+    name: String,
+    owner: String,
+    age: u8
+}
+
+let fido = Dog { name: String::from("Fido"), owner: String::from("Abraham Lincoln"), age: 8 };
+```
+
+# Traits
+Traits in Rust are a bit like interfaces in Java. They are used to specify shared behavior with types.
+
+Example:
+
+```rust
+pub trait Animal {
+    fn make_sound(&self) -> String;
+}
+
+struct Dog {
+    pub name: String
+}
+
+struct Cat {
+    pub name: String
+}
+
+impl Animal for Dog {
+    fn make_sound(&self) -> String {
+        String::from("Woof!")
+    }
+}
+
+impl Animal for Cat {
+    fn make_sound(&self) -> String {
+        String::from("Meow!")
+    }
+}
+
+fn main() {
+    let cat = Cat { name: String::from("Mr. Bigglesworth") };
+    let dog = Dog { name: String::from("Fido") };
+
+    println!("{} and {} say {} and {}",
+            cat.name,
+            dog.name,
+            cat.make_sound(),
+            dog.make_sound()
+            );
+}
+```
+
+### `derive` keyword
+When creating a `struct`, you can `derive` certain traits that automatically add their behavior to that `struct`.
+
+Example:
+
+```rust
+#[derive(Debug)]
+struct Dog {
+    name: String,
+    is_female: bool
+}
+```
+
+By deriving the `Debug` trait for the `Dog` `struct`, it is possible to print the Dog without writing a `to_string()` function. However, when using a `struct` that derives `Debug` in a formatter (`format!`, `println!`, et cetera), you must specify it in the format a bit differently.
+
+```rust
+#[derive(Debug)]
+struct Dog {
+    name: String,
+    is_female: bool
+}
+
+fn main() {
+    let dog = Dog { name: "Princess".to_string(), is_female: true };
+    println!("{:?}", dog); // Standard Debug print
+    println!("{:#?}", dog); // Pretty Debug print
+}
+```
+
+# Impl blocks
+In Rust, behavior for a struct is defined in its `impl` block.
+
+Example:
+
+```rust
+struct Dog {
+    name: String,
+    is_female: bool
+}
+
+impl Dog {
+    pub fn new(name: String, is_female: bool) -> Self {
+        Dog {
+            name,
+            is_female
+        }
+    }
+}
+```
+
+Note that if a parameter in a constructor function has a different name than the `struct`'s field, it has to be specified explicitly:
+
+```rust
+struct Dog {
+    name: String,
+    is_female: bool
+}
+
+impl Dog {
+    pub fn new(dog_name: String, female: bool) -> Self {
+        Dog {
+            name: dog_name,
+            is_female: female
+        }
+    }
+}
+```
+
+Any member functions must have either `&self` or `&mut self` as a parameter. This doesn't need to be specified when calling the function since the compiler does it for you automatically.
+
+```rust
+struct Dog {
+    name: String,
+    is_female: bool
+}
+
+impl Dog {
+    pub fn new(name: String, is_female: bool) -> Self {
+        Dog {
+            name,
+            is_female
+        }
+    }
+
+    pub fn say_hi(&self) {
+        println!("{} says hi!", self.name);
+    }
+
+    pub fn make_a_knight(&mut self) {
+        let title = if self.is_female { "Dame" } else { "Sir" };
+        self.name = format!("{} {}", title, self.name);
+    }
+}
+
+fn main() {
+    // Variable must be declared as mutable to use functions
+    // that mutate its values
+    let mut dog = Dog::new("Princess".to_string(), true);
+    dog.say_hi();
+    dog.make_a_knight();
+    dog.say_hi();
+}
+```
+
+# Comments
+Comments in Rust are pretty much the same as Java, C, C++, et cetera.
+
+Single line comment:
+```rust
+// woah a single line comment
+```
+
+Multiline comment:
+```rust
+/*
+woah
+look
+a
+multiline
+comment
+*/
 ```
