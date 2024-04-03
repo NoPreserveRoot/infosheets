@@ -1,5 +1,21 @@
 <h1 align="center">Rust</h1>
 
+# Table of Contents
+1. [Variables](#variables)
+2. [Primitives](#primitives)
+3. [Operators](#operators)
+4. [Vectors](#vectors)
+5. [Flow Control](#flow-control)
+6. [Loops](#loops)
+7. [Options](#options)
+8. [Results](#results)
+9. [Functions](#functions)
+10. [Macros](#macros)
+11. [Structs](#structs)
+12. [Traits](#traits)
+13. [Impl blocks](#impl-blocks)
+14. [Comments](#comments)
+
 # Variables
 In Rust, variables are defined using the `let` keyword.
 
