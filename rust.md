@@ -6,6 +6,10 @@
 - [/u/somebodddy's explanation of OOP in Rust](https://web.archive.org/web/20240403022822/https://old.reddit.com/r/rust/comments/d7w6n7/is_it_idiomatic_to_write_setters_and_getters/f15ib88/)
     - Explains why setters and getters are rare (and kind of a bad idea) in idiomatic Rust
 
+# Definitions
+Just some terms that people reading this may not be familiar with.
+- Panic — an unrecoverable error. Basically, something went wrong when we didn't anticipate it and the program needs to go bye bye.
+
 # Table of Contents
 1. [Variables](#variables)
 2. [Primitives](#primitives)
