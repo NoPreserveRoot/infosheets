@@ -1,5 +1,11 @@
 <h1 align="center">Rust</h1>
 
+# References
+- [The Rust Book](https://doc.rust-lang.org/stable/book/)
+    - Written by Steve Klabnik and Carol Nichols with contributions from the community
+- [/u/somebodddy's explanation of OOP in Rust](https://web.archive.org/web/20240403022822/https://old.reddit.com/r/rust/comments/d7w6n7/is_it_idiomatic_to_write_setters_and_getters/f15ib88/)
+    - Explains why setters and getters are rare (and kind of a bad idea) in idiomatic Rust
+
 # Table of Contents
 1. [Variables](#variables)
 2. [Primitives](#primitives)
