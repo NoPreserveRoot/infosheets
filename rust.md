@@ -538,6 +538,25 @@ fn main() {
 }
 ```
 
+# Lifetimes
+Rust doesn't have a garbage collector. Memory is freed when it is no longer referenced in the program, and references are checked at compile time. Because of this, we sometimes need to define lifetimes that tell the compiler "hey, this data needs to live at least as long as this other piece of data." Lifetime parameters are created using `<'{identifier}>` and the lifetime created is referenced using `&'{identifier}`. Lifetimes are definitely one of the most complex aspects of the language, but once you learn how to use them, they feel natural and make writing secure, fast, efficient code SO much easier.
+
+More information on lifetimes can be found in the book [here](https://doc.rust-lang.org/stable/book/ch10-03-lifetime-syntax.html#validating-references-with-lifetimes).
+
+```rust
+fn longer_string<'a>(s1: &'a str, s2: &'a str) -> &'a str {
+    if s1.len() > s2.len() { s1 } else { s2 }
+}
+
+fn main() {
+    let string1 = String::from("hello");
+    let string2 = String::from("world");
+
+    let longer = longer_string(&string1, &string2);
+    println!("Longer string is: {}", longer);
+}
+```
+
 # Comments
 Comments in Rust are pretty much the same as Java, C, C++, et cetera.
 
