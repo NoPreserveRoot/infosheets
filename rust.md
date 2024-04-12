@@ -146,6 +146,23 @@ Example:
 let val = "Hello, world!"; // Type is &str
 ```
 
+# References
+References are sort of like pointers; they point to an address in memory. However, references are checked by the borrow checker at compile time, so they are always guaranteed to point to valid data. So long, null pointer exceptions! Cloning data is an expensive operation ($O(n)$), so using references can help you save memory and execution time.
+
+```rust
+fn access_ref(string_ref: &String) {
+    println!("Woah, I was able to find this so much faster thanks to references! {}", string_ref);
+}
+
+fn main() {
+    let data: String = String::from("Cloning is O(n). Ew.〈⋟﹏⋞〉川");
+    // Accessing data via a reference is MUCH faster and allows us to keep
+    // it in scope. Passing data itself would move its value into access_ref,
+    // making it unavailable after access_ref.
+    access_ref(&data);
+}
+```
+
 # Operators
 Rust has quite a few operators, but the ones you're most likely to need are:
 
