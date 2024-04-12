@@ -595,3 +595,81 @@ multiline
 comment
 */
 ```
+
+# Example
+
+```rust
+fn average(nums: &[i32]) -> f64 {
+    // Create a mutable variable called sum so we can
+    // add to it. I chose i64 as the type since it's
+    // a good idea to choose a type with twice the size
+    // of whatever you're working with in cases like this.
+    let mut sum: i64 = 0;
+    // For loop iterating over nums
+    for i in nums {
+        // i has a type of &i32 and references can't be type cast,
+        // so we use the * operator on i to dereference it. Casting
+        // i from i32 to i64 helps to avoid integer overflows when
+        // using unchecked operations.
+        sum += *i as i64;
+    }
+    // Return the average as a 64 bit float
+    sum as f64 / nums.len() as f64
+}
+
+// Check if a character is in the Latin alphabet
+// using the .contains() method on a &str literal
+fn is_alpha(c: char) -> bool {
+    "abcdefghijklmnopqrstuvwxyzABCDEFHIJKLMNOPQRSTUVWXYZ".contains(c)
+}
+
+// Check if two vectors are equal
+fn i32_vecs_eq(list1: Vec<i32>, list2: Vec<i32>) -> bool {
+    // If their lengths are different, they're obviously
+    // not equal.
+    if list1.len() != list2.len() {
+        return false
+    }
+
+    // Iterate over the indices of the lists
+    for i in 0..list1.len() {
+        // If two elements are unequal, return false early
+        if list1[i] != list2[i] {
+            return false
+        }
+    }
+
+    // Otherwise, return true
+    true
+}
+
+fn char_to_multiplier(c: char) -> u16 {
+    // Set multiplier to a value returned by
+    // the match block.
+    let multiplier: u16 = match c {
+        'a' => 65535,
+        'b' => 4095,
+        'c' => 255,
+        'd' => 1,
+        // _ would be the "default" case in Java
+        _ => 0
+    };
+
+    // Return mutliplier
+    multiplier
+}
+
+fn main() {
+    // average() accepts a slice of i32s since an array's size
+    // must be known at compile time, while the size of a slice
+    // isn't necessary. A vec could could also be used here.
+    println!("{}", average(&[1, 2, 4, 5, 6, 6, 2, 5, 7, 2,
+        13, 5641, 5413641, 1]));
+
+    println!("{}", is_alpha('b'));
+
+    let v1: Vec<i32> = vec![1, 5, 4, 3, 6, 7];
+    let v2: Vec<i32> = vec![5, 6, 4, 32, 7, 9];
+    println!("{}", i32_vecs_eq(v1, v2));
+}
+```
