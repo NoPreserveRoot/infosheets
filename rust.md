@@ -1,6 +1,6 @@
 <h1 align="center">Rust</h1>
 
-# References
+# Resources
 - [The Rust Book](https://doc.rust-lang.org/stable/book/)
     - Written by Steve Klabnik and Carol Nichols with contributions from the community
 - [/u/somebodddy's explanation of OOP in Rust](https://web.archive.org/web/20240403022822/https://old.reddit.com/r/rust/comments/d7w6n7/is_it_idiomatic_to_write_setters_and_getters/f15ib88/)
