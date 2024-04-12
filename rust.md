@@ -29,6 +29,7 @@ Just some terms that people reading this may not be familiar with.
 1. [Traits](#traits)
 1. [Impl blocks](#impl-blocks)
 1. [Comments](#comments)
+1. [Crates and Modules](#crates-and-modules)
 1. [Example](#example)
 
 # Variables
@@ -594,6 +595,24 @@ a
 multiline
 comment
 */
+```
+
+# Crates and Modules
+In Rust, modules and crates (similar to packages in Java) can be imported into a file for use. The syntax for this can be found in the example below. Note that `::` is used to traverse paths for "imports" rather than `.` or `/`.
+
+Example:
+```rust
+// Multiple packages can be imported explicitly in one use
+// statement using curly braces
+use std::{io, fs};
+// Using the Regex object from the regex crate
+// NOTE: regex must be added to your Cargo.toml
+// before it can be used.
+use regex::Regex;
+// Use everything in Actix (generally not the best idea)
+// NOTE: Actix is a web framework that allows you to easily
+// create HTTP servers (great for REST APIs :D)
+use actix_web::*;
 ```
 
 # Example
